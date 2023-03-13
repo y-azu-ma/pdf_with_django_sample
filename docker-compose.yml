@@ -14,9 +14,9 @@ services:
   #     - TZ=Asia/Tokyo
 
   pdf_django:
-    image: pdf_django:latest
-    #build:
-    #  context: .
+    image: pdf-django:latest
+    build:
+      context: .
     #  dockerfile: ./Dockerfile-debug
     #  command: bash -c export DUID=$(id -u); docker build -f ./Dockerfile-debug -t daysoff-debug:latest --build-arg DUID=$DUID .
     container_name: pdf-django
@@ -29,6 +29,9 @@ services:
     ports:
       - 8000:8000
     #  - 8001:8001   # uwsgi ポート
-    # links:
+    # command: python manage.py runserver 0.0.0.0:8000
+    command: >
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    # depends_on:
     #   - db
 
