@@ -23,5 +23,5 @@ def weasy_test(request):
     stream = io.BytesIO(pdf_file)
 
     # return HttpResponse(message)
-    # return FileResponse(stream, as_attachment=True, filename='sample.pdf')
-    return FileResponse(pdf_file, as_attachment=True, filename='sample_x.pdf')
+    return FileResponse(stream, as_attachment=True, filename='sample.pdf')
+    # return FileResponse(pdf_file, as_attachment=True, filename='sample_x.pdf')
