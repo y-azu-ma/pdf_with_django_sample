@@ -15,13 +15,16 @@ def weasy_test(request):
 
     # html_template = get_template('http://abehiroshi.la.coocan.jp/')
 
-    pdf_file = HTML('http://abehiroshi.la.coocan.jp/').write_pdf(
-        # target=stream
-        # この中でcssを指定する
-        # stylesheets=[CSS('cms/static/css/pdf.css')]
-    )
-    stream = io.BytesIO(pdf_file)
+    # pdf_file = HTML('http://abehiroshi.la.coocan.jp/').write_pdf(
+    #     # target=stream
+    #     # この中でcssを指定する
+    #     # stylesheets=[CSS('cms/static/css/pdf.css')]
+    # )
+    # stream = io.BytesIO(pdf_file)
+
+    pdf_file = render_to_string('weasyprint_sample/test_template.html')
+    # stream = io.BytesIO(pdf_file)
 
     # return HttpResponse(message)
-    return FileResponse(stream, as_attachment=True, filename='sample.pdf')
-    # return FileResponse(pdf_file, as_attachment=True, filename='sample_x.pdf')
+    # return FileResponse(stream, as_attachment=True, filename='sample.pdf')
+    return FileResponse(pdf_file, as_attachment=True, filename='sample_x.pdf')
