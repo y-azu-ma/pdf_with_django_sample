@@ -22,9 +22,17 @@ def weasy_test(request):
     # )
     # stream = io.BytesIO(pdf_file)
 
-    pdf_file = render_to_string('weasyprint_sample/test_template.html')
-    # stream = io.BytesIO(pdf_file)
+    # pdf_file = render_to_string('weasyprint_sample/test_template.html')
+    
+    # stream = io.BytesIO()
+    html_string = render_to_string(
+        template_name='weasyprint_sample/test_template.html',
+        request=request)
+    pdf_file = HTML(string=html_string).write_pdf(
+        # target=stream
+    )
+    stream = io.BytesIO(pdf_file)
 
     # return HttpResponse(message)
-    # return FileResponse(stream, as_attachment=True, filename='sample.pdf')
-    return FileResponse(pdf_file, as_attachment=True, filename='sample_x.pdf')
+    return FileResponse(stream, as_attachment=True, filename='sample.pdf')
+    # return FileResponse(pdf_file, as_attachment=True, filename='sample_x.pdf')
